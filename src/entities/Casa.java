@@ -15,16 +15,16 @@ public class Casa {
         this.madeira = madeira;
 
     }
-    public void adicionarEntidade(Entidade e){
-        entidades.add(e);
-    }
-
-public Boolean estaOcupada(){
+//    public Entidade compararEntidade(Entidade entidade){ //ver agente e poco/wumpus/wagner
+//        for(Entidade e : getEntidades()){
+//            if(e == entidade)
+//                return e;
+//        }
+//        return null;
+//    }
+    public Boolean estaOcupada(){
     return this.getEntidades().size() != 0;
 }
-    public List<Entidade> getEntidades() {
-        return entidades;
-    }
 
     public Integer getFedor() {
         return fedor;
@@ -58,6 +58,12 @@ public Boolean estaOcupada(){
         this.madeira = madeira;
     }
 
+    public List<Entidade> getEntidades() {
+        return entidades;
+    }
+    public void removeEntidade(Entidade entidade) {
+        this.entidades.remove(entidade);
+    }
 
     @Override
     public String toString() {

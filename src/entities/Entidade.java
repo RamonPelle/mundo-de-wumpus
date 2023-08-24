@@ -12,20 +12,17 @@ abstract class Entidade {
     }
 
     void geraPosicoes(Casa[][] tabuleiro) {
-
         Random random = new Random();
         Integer novaPosX;
         Integer novaPosY;
         do {
             novaPosX = random.nextInt(Tabuleiro.getTamanho());
             novaPosY = random.nextInt(Tabuleiro.getTamanho());
-        } while (tabuleiro[novaPosX][novaPosY].estaOcupada() && (novaPosX + novaPosY) == 0); //[0,0] É o agente
+        } while (tabuleiro[novaPosX][novaPosY].estaOcupada() || (novaPosX + novaPosY) == 0); //[0,0] É o agente
 
         Tabuleiro.setCasa(novaPosX,novaPosY,this);
         setPosX(novaPosX);
         setPosY(novaPosY);
-
-
     }
 
     public Integer getPosX() {
