@@ -1,10 +1,7 @@
 package entities;
 
-import java.util.Random;
-
-public class Poco extends Entidade implements Infectar{
-
-    public Poco() {
+abstract class Monstro extends Entidade implements Infectar{
+    public Monstro() {
         geraPosicoes(Tabuleiro.getTabuleiro());
         infectaAdj(Tabuleiro.getTabuleiro());
     }
@@ -24,9 +21,9 @@ public class Poco extends Entidade implements Infectar{
             Integer adjX = adjPos[0];
             Integer adjY = adjPos[1];
 
-            if((adjX >= 0 && adjX <= Tabuleiro.getTamanho() - 1) && (adjY >= 0 && adjY <= Tabuleiro.getTamanho() - 1)){
+            if ((adjX >= 0 && adjX <= Tabuleiro.getTamanho() - 1) && (adjY >= 0 && adjY <= Tabuleiro.getTamanho() - 1)) {
                 if (!tabuleiro[adjX][adjY].estaOcupada()) {
-                    tabuleiro[adjX][adjY].setBrisa(1);
+                    tabuleiro[adjX][adjY].setFedor(1);
                 }
             }
         }

@@ -17,9 +17,9 @@ abstract class Entidade {
         Integer novaPosX;
         Integer novaPosY;
         do {
-            novaPosX = random.nextInt(5);
-            novaPosY = random.nextInt(5);
-        } while (estaOcupada(tabuleiro[novaPosX][novaPosY]) && (novaPosX + novaPosY) == 0); //[0,0] É o agente
+            novaPosX = random.nextInt(Tabuleiro.getTamanho());
+            novaPosY = random.nextInt(Tabuleiro.getTamanho());
+        } while (tabuleiro[novaPosX][novaPosY].estaOcupada() && (novaPosX + novaPosY) == 0); //[0,0] É o agente
 
         Tabuleiro.setCasa(novaPosX,novaPosY,this);
         setPosX(novaPosX);
@@ -27,10 +27,6 @@ abstract class Entidade {
 
 
     }
-
-    public Boolean estaOcupada(Casa casa){
-        return casa.getEntidades().size() != 0;
-            }
 
     public Integer getPosX() {
         return posX;

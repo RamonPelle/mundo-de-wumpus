@@ -19,15 +19,9 @@ public class Casa {
         entidades.add(e);
     }
 
-//    public void printEntidade(){
-//        System.out.println(entidades.size());
-//        if(entidades.size() > 0){
-//            for(Entidade entidade : entidades){
-//                System.out.println(entidade.getClass().getName());
-//            }
-//        }
-//    }
-
+public Boolean estaOcupada(){
+    return this.getEntidades().size() != 0;
+}
     public List<Entidade> getEntidades() {
         return entidades;
     }
