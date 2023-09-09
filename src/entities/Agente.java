@@ -102,7 +102,6 @@ public class Agente extends Entidade implements Andar{
                                 }else{
                                     Wumpus.setMorto(true);
                                 }
-
                                 atual.getEntidades().clear();
                             }else{
                                 System.out.println("Não há monstros nessa casa.");

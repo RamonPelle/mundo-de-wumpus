@@ -40,8 +40,12 @@ public class Main {
                                 System.out.println("Qual direção você quer Andar? [0-3]\n0: Baixo\n1: Cima\n2: Direita\n3: Esquerda");
                                 opcaoAndar = sc.nextInt();
                                 if (opcaoAndar < 4 && opcaoAndar >= 0) {
-                                    wum.andar(random.nextInt(4));
-                                    wg.andar(random.nextInt(8));
+                                    if(!wum.morto){
+                                        wum.andar(random.nextInt(4));
+                                    }
+                                    if(!wg.morto){
+                                        wg.andar(random.nextInt(8));
+                                    }
                                     agente.andar(opcaoAndar);
                                 }
                                 break;
