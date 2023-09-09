@@ -23,6 +23,7 @@ import java.util.Random;
                 this.setPosX(newX);
                 this.setPosY(newY);
                 Tabuleiro.setCasa(newX, newY, this);
+                infectaAdj(Tabuleiro.getTabuleiro());
             }
         }
     }

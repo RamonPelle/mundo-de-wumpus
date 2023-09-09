@@ -24,6 +24,7 @@ abstract class Entidade {
         setPosX(novaPosX);
         setPosY(novaPosY);
     }
+
     public Boolean estaNoLimite(Integer posX, Integer posY){
         Integer tamanhoTabuleiro = Tabuleiro.getTamanho();
         return posX >= 0 && posX < tamanhoTabuleiro && posY >= 0 && posY < tamanhoTabuleiro;
