@@ -10,18 +10,12 @@ public class Casa {
     private Integer brisa = 0;
     private Integer ouro;
     private Integer madeira;
+    private Boolean visto = false;
     public Casa(Integer ouro, Integer madeira){
         this.ouro = ouro;
         this.madeira = madeira;
 
     }
-//    public Entidade compararEntidade(Entidade entidade){ //ver agente e poco/wumpus/wagner
-//        for(Entidade e : getEntidades()){
-//            if(e == entidade)
-//                return e;
-//        }
-//        return null;
-//    }
     public Boolean estaOcupada(){
     return this.getEntidades().size() != 0;
 }
@@ -65,14 +59,36 @@ public class Casa {
         this.entidades.remove(entidade);
     }
 
+    public Boolean getVisto() {
+        return visto;
+    }
+
+    public void setVisto(Boolean visto) {
+        this.visto = visto;
+    }
+
     @Override
     public String toString() {
-        return "Casa{" +
-                "entidades=" + entidades +
-                ", fedor=" + fedor +
-                ", brisa=" + brisa +
-                ", ouro=" + ouro +
-                ", madeira=" + madeira +
-                '}';
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Entidade entidade : entidades) {
+            stringBuilder.append(entidade.toString()).append(", ");
+        }
+
+        if (!entidades.isEmpty()) {
+            stringBuilder.deleteCharAt(stringBuilder.length() - 2);
+        }
+
+        stringBuilder.append("Fedor:").append(fedor).append(", ");
+//        stringBuilder.append("brisa=").append(brisa).append(", ");
+        if(this.getOuro()==1){
+            stringBuilder.append("Ouro=").append(ouro).append(", ");
+        }
+
+//        stringBuilder.append("madeira=").append(madeira).append(", ");
+
+
+
+
+        return stringBuilder.toString();
     }
 }

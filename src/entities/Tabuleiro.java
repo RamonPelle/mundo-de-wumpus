@@ -3,19 +3,20 @@ package entities;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Tabuleiro {
+    Random random = new Random();
     private static Casa tabuleiro[][];
 
-    private final static Integer TAMANHO = 5;
+    public final static Integer TAMANHO = 5;
     private static Integer madeira = 10;
-
-    private List<Entidade> entidades = new ArrayList();
+    Scanner sc = new Scanner(System.in);
+    private List<Entidade> entidades = new ArrayList(); //0: Wagner, 1: Wumpus, 2,3: Poco, 4: Agente
     public Tabuleiro(){
         this.tabuleiro = geraTabuleiro();
         geraEntidades();
         geraItens();
-        //printTabuleiro(this.tabuleiro);
     }
 
     private static Casa[][] geraTabuleiro(){
@@ -33,7 +34,6 @@ public class Tabuleiro {
         Poco poco1 = new Poco();
         Poco poco2 = new Poco();
         Agente agente = new Agente();
-
         this.entidades.add(wagner);
         this.entidades.add(wumpus);
         this.entidades.add(poco1);
@@ -42,7 +42,7 @@ public class Tabuleiro {
     }
 
     private void geraItens(){
-        Random random = new Random();
+
         Integer posX;
         Integer posY;
         Boolean temPoco;
@@ -70,23 +70,101 @@ public class Tabuleiro {
         }
         tabuleiro[posX][posY].setOuro(1);
     }
-    public static void printTabuleiro(Casa[][] t){
+    public void printVisaoAgente(){
         for (int i = 0; i < TAMANHO; i++) {
             for (int j = 0; j < TAMANHO; j++) {
-                System.out.print(t[i][j] + " ");
+                if(tabuleiro[i][j].getVisto()){
+                    System.out.print(tabuleiro[i][j] + " ");
+                }else{
+                    System.out.print("* ");
+                }
             }
             System.out.println();
         }
     }
 
-    public static void fim(String msg){
-        System.out.println("Voce morreu por conta de: " + msg);
-        System.exit(0);
-    } //PROV NAO VAI FICAR NESSA CLASSE
+    public void printDebug(){
+        for (int i = 0; i < TAMANHO; i++) {
+            for (int j = 0; j < TAMANHO; j++) {
+                System.out.print(tabuleiro[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
 
-    public static Boolean verificaFim(Agente agente){
+    public void vezMonstros(){
+        Entidade wg = this.entidades.get(0);
+        Entidade wum = this.entidades.get(1);
+        if (wg instanceof Wagner) {
+            ((Wagner) wg).andar(random.nextInt(8));
+        } else {
+            System.out.println("A entidade não é um Wagner.");
+        }
+        if (wum instanceof Wumpus) {
+            ((Wumpus) wum).andar(random.nextInt(4));
+        } else {
+            System.out.println("A entidade não é um Wagner.");
+        }
+
+    }
+
+    public static void iluminarCasas(Integer posX, Integer posY, Integer direcao){
+        if (direcao == 1) {
+            for (int i = posX; i >= 0; i--) {
+                tabuleiro[i][posY].setVisto(true);
+            }
+        } else if (direcao == 0) {
+            for (int i = posX; i < TAMANHO; i++) {
+                tabuleiro[i][posY].setVisto(true);
+            }
+        } else if (direcao==3) {
+            for (int j = posY; j >= 0; j--) {
+                tabuleiro[posX][j].setVisto(true);
+            }
+        } else if (direcao==2) {
+            for (int j = posY; j < TAMANHO; j++) {
+                tabuleiro[posX][j].setVisto(true);
+            }
+        } else {
+            System.out.println("Direção inválida. Use [0-3]");
+        }
+    }
+    public void fim(Agente ag){
+        if(getCasa(ag).getEntidades().contains(entidades.get(0)) || getCasa(ag).getEntidades().contains(entidades.get(1))){
+            System.out.println("O monstro te pegou! :C");
+        }else if(ag.getOuro() == 0){
+            System.out.println("Caio no poço! :C");
+        }else{
+            System.out.println("Parabéns, voce ganhou!");
+        }
+
+    }
+
+    public Boolean verificaVitoria(Agente agente){
         return agente.getOuro() == 1 && (agente.getPosX() == 0 && agente.getPosY() == 0);
-    } //PROV NAO VAI FICAR NESSA CLASSE
+    }
+
+    public Boolean verificaMorte(Agente ag){
+        Boolean ripWagner = getCasa(ag).getEntidades().contains(entidades.get(0));
+        Boolean ripWumpus = getCasa(ag).getEntidades().contains(entidades.get(1));
+        Boolean ripPoco = getCasa(ag).getEntidades().contains(entidades.get(2)) || getCasa(ag).getEntidades().contains(entidades.get(3));
+        if(ripWagner && ag.getVida() == 1){
+            ag.setVida(ag.getVida() - 1);
+            return false;
+        }else if(ripWagner && ag.getVida() != 1){
+            return true;
+        }
+
+        if(ripPoco && ag.getMadeira() <= 0){
+            return true;
+        }else if(ripPoco){
+            ag.setMadeira(getMadeira() - 1);
+            return false;
+        }
+        return ripWumpus;
+    }
+
+
     public static Casa[][] getTabuleiro() {
         return tabuleiro;
     }
