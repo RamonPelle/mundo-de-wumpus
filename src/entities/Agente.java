@@ -16,6 +16,7 @@ public class Agente extends Entidade implements Andar{
         this.setPosY(0);
         Tabuleiro.setCasa(this.getPosX(),this.getPosY(),this);
         Tabuleiro.getCasa(this).setVisto(true);
+        temFedor(); //caso nasca um monstro perto do agente ja chama a funcao, nao precisa andar
     }
 
     public void andar(Integer direcao){
@@ -73,37 +74,45 @@ public class Agente extends Entidade implements Andar{
                     }else{
                         setFlecha(getFlecha() - 1);
                     }
-                }
-                System.out.println("Qual direção você quer atirar? [0-3]\n0: Baixo\n1: Cima\n2: Direita\n3: Esquerda");
-                Integer posX = getPosX();
-                Integer posY = getPosY();
-                Integer[][] adjPositions = {
-                        {posX + 1, posY},
-                        {posX - 1, posY},
-                        {posX, posY + 1},
-                        {posX, posY - 1}
-                };
-                opcao = sc.nextInt();
+                    System.out.println("Qual direção você quer atirar? [0-3]\n0: Baixo\n1: Cima\n2: Direita\n3: Esquerda");
+                    Integer posX = getPosX();
+                    Integer posY = getPosY();
+                    Integer[][] adjPositions = {
+                            {posX + 1, posY},
+                            {posX - 1, posY},
+                            {posX, posY + 1},
+                            {posX, posY - 1}
+                    };
+                    opcao = sc.nextInt();
 
-                if (opcao >= 0 && opcao <= 3) {
-                    Integer newX = adjPositions[opcao][0];
-                    Integer newY = adjPositions[opcao][1];
+                    if (opcao >= 0 && opcao <= 3) {
+                        Integer newX = adjPositions[opcao][0];
+                        Integer newY = adjPositions[opcao][1];
 
-                    if (estaNoLimite(newX, newY)) {
-                        this.setPosX(newX);
-                        this.setPosY(newY);
-                        Casa atual = Tabuleiro.getCasa(this);
+                        if (estaNoLimite(newX, newY)) {
+                            this.setPosX(newX);
+                            this.setPosY(newY);
+                            Casa atual = Tabuleiro.getCasa(this);
 
-                        if(Tabuleiro.getCasa(this).getEntidades().stream().anyMatch(e -> e instanceof Monstro)){
-                            System.out.println("Você matou o monstro!");
-                            atual.getEntidades().clear();
-                        }else{
-                            System.out.println("Não há monstros nessa casa.");
+                            if(Tabuleiro.getCasa(this).getEntidades().stream().anyMatch(e -> e instanceof Monstro)){
+                                System.out.println("Você matou o monstro!");
+                                Entidade monstro = Tabuleiro.getCasa(this).getEntidades().get(0);
+                                if (monstro instanceof Wagner) {
+                                    Wagner.setMorto(true);
+                                }else{
+                                    Wumpus.setMorto(true);
+                                }
+
+                                atual.getEntidades().clear();
+                            }else{
+                                System.out.println("Não há monstros nessa casa.");
+                            }
+                            this.setPosX(posX);
+                            this.setPosY(posY);
                         }
-                        this.setPosX(posX);
-                        this.setPosY(posY);
                     }
                 }
+
             }
         }
     }

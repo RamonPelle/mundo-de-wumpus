@@ -93,17 +93,16 @@ public class Tabuleiro {
     }
 
     public void vezMonstros(){
+
         Entidade wg = this.entidades.get(0);
         Entidade wum = this.entidades.get(1);
-        if (wg instanceof Wagner) {
-            ((Wagner) wg).andar(random.nextInt(8));
-        } else {
-            System.out.println("A entidade não é um Wagner.");
-        }
-        if (wum instanceof Wumpus) {
+
+        if (wum instanceof Wumpus && !Wumpus.morto) {
             ((Wumpus) wum).andar(random.nextInt(4));
-        } else {
-            System.out.println("A entidade não é um Wagner.");
+
+        }
+        if (wg instanceof Wagner && !Wagner.morto) {
+            ((Wagner) wg).andar(random.nextInt(8));
         }
 
     }

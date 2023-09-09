@@ -1,5 +1,6 @@
 
 import entities.Agente;
+import entities.Monstro;
 import entities.Tabuleiro;
 import java.util.Scanner;
 
@@ -11,33 +12,48 @@ public class Main {
             System.out.println("Bem vindo!! Escolha uma opção:");
             System.out.println("1: Jogar");
             System.out.println("2: Sair");
-            Integer op = sc.nextInt();
-            switch(op){
+            Integer opcaoMenu = sc.nextInt();
+            Integer opcaoMenu2;
+            Integer opcaoAndar;
+            switch(opcaoMenu){
                 case 1:
                     System.out.println("Quer debugar? [1: Sim | 2: Não]");
-                    op = sc.nextInt();
+                    opcaoMenu = sc.nextInt();
                     System.out.println("O jogo vai começar!");
                     jogo = new Tabuleiro();
                     Agente agente = (Agente) jogo.getEntidades().get(4);
-                    do{
-                        agente.printDadosAgente();
-                        if(op == 1){
-                            jogo.printDebug();
-                        }else{
-                            jogo.printVisaoAgente();
-                        }
+                    do {
+                        System.out.println("1: Andar\n2: Lanterna\n3: Mochila");
+                        opcaoMenu2 = sc.nextInt();
 
-                        System.out.println("Qual direção você quer Andar? [0-3]\n0: Baixo\n1: Cima\n2: Direita\n3: Esquerda");
-                        System.out.println("4: Lanterna");
-                        Integer opcao = sc.nextInt();
-                        if(opcao == 4){
-                            agente.usarLanterna();
-                            //lanterna
-                        }else if(opcao < 4 && opcao >=0){
-                            jogo.vezMonstros();
-                            agente.andar(opcao);
-                        }
+                        switch (opcaoMenu2) {
+                            case 1:
 
+                                if (opcaoMenu == 1) {
+                                    jogo.printDebug();
+                                } else {
+                                    jogo.printVisaoAgente();
+                                }
+                                System.out.println("Qual direção você quer Andar? [0-3]\n0: Baixo\n1: Cima\n2: Direita\n3: Esquerda");
+                                opcaoAndar = sc.nextInt();
+                                if (opcaoAndar < 4 && opcaoAndar >= 0) {
+
+                                    jogo.vezMonstros();
+                                    agente.andar(opcaoAndar);
+                                }
+                                break;
+                            case 2:
+                                if (opcaoMenu == 1) {
+                                    jogo.printDebug();
+                                } else {
+                                    jogo.printVisaoAgente();
+                                }
+                                agente.usarLanterna();
+                                break;
+                            case 3:
+                                agente.printDadosAgente();
+                                break;
+                        }
                     }
                     while(!jogo.verificaMorte((Agente)jogo.getEntidades().get(4))
                             && !jogo.verificaVitoria((Agente) jogo.getEntidades().get(4)));
