@@ -23,7 +23,10 @@ import java.util.Random;
                 this.setPosX(newX);
                 this.setPosY(newY);
                 Tabuleiro.setCasa(newX, newY, this);
+<<<<<<< HEAD
                 infectaAdj(Tabuleiro.getTabuleiro());
+=======
+>>>>>>> c4facee (update: jogo funcional, problema de heranca no infectaAdj Wagner)
             }
         }
     }

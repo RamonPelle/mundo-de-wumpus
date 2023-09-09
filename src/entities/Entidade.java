@@ -24,7 +24,10 @@ abstract class Entidade {
         setPosX(novaPosX);
         setPosY(novaPosY);
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> c4facee (update: jogo funcional, problema de heranca no infectaAdj Wagner)
     public Boolean estaNoLimite(Integer posX, Integer posY){
         Integer tamanhoTabuleiro = Tabuleiro.getTamanho();
         return posX >= 0 && posX < tamanhoTabuleiro && posY >= 0 && posY < tamanhoTabuleiro;
