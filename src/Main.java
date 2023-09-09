@@ -1,11 +1,12 @@
 
-import entities.Agente;
-import entities.Monstro;
-import entities.Tabuleiro;
+import entities.*;
+
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        Random random = new Random();
         Scanner sc = new Scanner(System.in);
         Tabuleiro jogo = null;
         while(true){
@@ -22,6 +23,8 @@ public class Main {
                     System.out.println("O jogo vai começar!");
                     jogo = new Tabuleiro();
                     Agente agente = (Agente) jogo.getEntidades().get(4);
+                    Wagner wg = (Wagner) jogo.getEntidades().get(0);
+                    Wumpus wum = (Wumpus) jogo.getEntidades().get(1);
                     do {
                         System.out.println("1: Andar\n2: Lanterna\n3: Mochila");
                         opcaoMenu2 = sc.nextInt();
@@ -37,8 +40,8 @@ public class Main {
                                 System.out.println("Qual direção você quer Andar? [0-3]\n0: Baixo\n1: Cima\n2: Direita\n3: Esquerda");
                                 opcaoAndar = sc.nextInt();
                                 if (opcaoAndar < 4 && opcaoAndar >= 0) {
-
-                                    jogo.vezMonstros();
+                                    wum.andar(random.nextInt(4));
+                                    wg.andar(random.nextInt(8));
                                     agente.andar(opcaoAndar);
                                 }
                                 break;
