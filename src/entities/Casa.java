@@ -72,24 +72,29 @@ public class Casa extends JPanel {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (Entidade entidade : entidades) {
-            stringBuilder.append(entidade.toString()).append(", ");
+            stringBuilder.append(entidade.toString()).append(" ");
         }
 
         if (!entidades.isEmpty()) {
-            stringBuilder.deleteCharAt(stringBuilder.length() - 2);
+            stringBuilder.append("");
         }
 
-        stringBuilder.append("Fedor:").append(fedor).append(", ");
-//        stringBuilder.append("brisa=").append(brisa).append(", ");
+        if(this.getFedor()==1){
+            stringBuilder.append("Fedor:").append(fedor).append(" ");
+        }
+
+
+        if(this.getBrisa()==1){
+            stringBuilder.append("brisa=").append(brisa).append(" ");
+        }
+
         if(this.getOuro()==1){
-            stringBuilder.append("Ouro=").append(ouro).append(", ");
+            stringBuilder.append("Ouro=").append(ouro).append(" ");
         }
-
-//        stringBuilder.append("madeira=").append(madeira).append(", ");
-
-
-
-
+        if(this.getMadeira()==1){
+            stringBuilder.append("madeira=").append(madeira).append(" ");
+        }
+        stringBuilder.append(" | ");
         return stringBuilder.toString();
     }
 }

@@ -10,13 +10,17 @@ public class Main {
         Random random = new Random();
         Scanner sc = new Scanner(System.in);
         Tabuleiro jogo = null;
+        
         while(true){
             System.out.println("Bem vindo!! Escolha uma opção:");
             System.out.println("1: Jogar");
-            System.out.println("2: Sair");
+            System.out.println("2: Jogar GUI");
+            System.out.println("3: Sair");
+
             Integer opcaoMenu = sc.nextInt();
             Integer opcaoMenu2;
             Integer opcaoAndar;
+            
             switch(opcaoMenu){
                 case 1:
                     System.out.println("Quer debugar? [1: Sim | 2: Não]");
@@ -68,10 +72,12 @@ public class Main {
                     jogo.fim((Agente) jogo.getEntidades().get(4));
                     break;
                 case 2:
-                    Tabuleiro jogo1 = new Tabuleiro();
-                        GUI guiMode = new GUI(Tabuleiro.getTabuleiro());
-//                    System.out.println("Encerrando...");
-//                    System.exit(0);
+                    Tabuleiro jogoGUI = new Tabuleiro();
+                    GUI guiMode = new GUI(Tabuleiro.getTabuleiro());
+                    break;
+                case 3:
+                    System.out.println("Encerrando...");
+                    System.exit(0);
                 default:
                     System.out.println("Opção inexistente, tente novamente.");
                     break;
