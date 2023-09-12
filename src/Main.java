@@ -1,5 +1,6 @@
 
 import entities.*;
+import entities.IG.*;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -67,8 +68,10 @@ public class Main {
                     jogo.fim((Agente) jogo.getEntidades().get(4));
                     break;
                 case 2:
-                    System.out.println("Encerrando...");
-                    System.exit(0);
+                    Tabuleiro jogo1 = new Tabuleiro();
+                        GUI guiMode = new GUI(Tabuleiro.getTabuleiro());
+//                    System.out.println("Encerrando...");
+//                    System.exit(0);
                 default:
                     System.out.println("Opção inexistente, tente novamente.");
                     break;

@@ -1,10 +1,11 @@
 package entities;
 
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Casa {
+public class Casa extends JPanel {
     private List<Entidade> entidades = new ArrayList<>();
     private Integer fedor = 0;
     private Integer brisa = 0;
