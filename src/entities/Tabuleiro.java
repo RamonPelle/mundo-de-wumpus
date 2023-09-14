@@ -9,7 +9,7 @@ public class Tabuleiro {
     Random random = new Random();
     private static Casa tabuleiro[][];
 
-    public final static Integer TAMANHO = 5;
+    public final static Integer TAMANHO = 15;
     private static Integer madeira = 10;
     Scanner sc = new Scanner(System.in);
     private List<Entidade> entidades = new ArrayList(); //0: Wagner, 1: Wumpus, 2,3: Poco, 4: Agente
