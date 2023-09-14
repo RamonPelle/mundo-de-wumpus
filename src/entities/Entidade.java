@@ -2,7 +2,7 @@ package entities;
 
 import java.util.Random;
 
-abstract class Entidade {
+public abstract class Entidade {
     private Integer posX;
     private Integer posY;
     private Random random = new Random();

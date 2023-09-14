@@ -1,10 +1,11 @@
 package entities;
 
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Casa {
+public class Casa extends JPanel {
     private List<Entidade> entidades = new ArrayList<>();
     private Integer fedor = 0;
     private Integer brisa = 0;
@@ -71,24 +72,29 @@ public class Casa {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (Entidade entidade : entidades) {
-            stringBuilder.append(entidade.toString()).append(", ");
+            stringBuilder.append(entidade.toString()).append(" ");
         }
 
         if (!entidades.isEmpty()) {
-            stringBuilder.deleteCharAt(stringBuilder.length() - 2);
+            stringBuilder.append("");
         }
 
-        stringBuilder.append("Fedor:").append(fedor).append(", ");
-//        stringBuilder.append("brisa=").append(brisa).append(", ");
+        if(this.getFedor()==1){
+            stringBuilder.append("Fedor:").append(fedor).append(" ");
+        }
+
+
+        if(this.getBrisa()==1){
+            stringBuilder.append("brisa=").append(brisa).append(" ");
+        }
+
         if(this.getOuro()==1){
-            stringBuilder.append("Ouro=").append(ouro).append(", ");
+            stringBuilder.append("Ouro=").append(ouro).append(" ");
         }
-
-//        stringBuilder.append("madeira=").append(madeira).append(", ");
-
-
-
-
+        if(this.getMadeira()==1){
+            stringBuilder.append("madeira=").append(madeira).append(" ");
+        }
+        stringBuilder.append(" | ");
         return stringBuilder.toString();
     }
 }

@@ -99,8 +99,10 @@ public class Agente extends Entidade implements Andar{
                                 Entidade monstro = Tabuleiro.getCasa(this).getEntidades().get(0);
                                 if (monstro instanceof Wagner) {
                                     Wagner.setMorto(true);
+                                    Wagner.limpaAdj(Tabuleiro.getTabuleiro(), this.getPosX(), this.getPosY());
                                 }else{
                                     Wumpus.setMorto(true);
+                                    Wumpus.limpaAdj(Tabuleiro.getTabuleiro(), this.getPosX(), this.getPosY());
                                 }
                                 atual.getEntidades().clear();
                             }else{
@@ -128,10 +130,28 @@ public class Agente extends Entidade implements Andar{
                 sb.append("  - Lanterna: ").append(lanterna).append(" unidades\n");
             }
 
-            sb.append("  - Vida: ").append(vida).append("\n");
+            sb.append("  - Vidas extras: ").append(vida).append("\n");
             sb.append("  - Ouro: ").append(ouro).append(" moedas\n");
 
             System.out.println(sb);
+    }
+
+    public String dadosAgente(){
+
+        StringBuilder sb = new StringBuilder("Mochila do Agente:\n");
+
+        if (madeira > 0) {
+            sb.append("  - Madeira: ").append(madeira).append(" unidades\n");
+        }
+
+        if (lanterna > 0) {
+            sb.append("  - Lanterna: ").append(lanterna).append(" unidades\n");
+        }
+
+        sb.append("  - Vidas extras: ").append(vida).append("\n");
+        sb.append("  - Ouro: ").append(ouro).append(" moedas\n");
+
+        return sb.toString();
     }
     public Integer getMadeira() {
         return madeira;
